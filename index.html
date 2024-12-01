@@ -523,7 +523,7 @@
                     <div class="user-dropdown">
                         <a href="#"><i class="fas fa-user"></i> Profile</a>
                         <a href="#"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="#" id="signOutButton"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                     </div>
                 </div>
             </div>
@@ -1203,6 +1203,20 @@
                 });
             }
         }
+
+        // Add this to your existing scripts
+        document.getElementById('signOutButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Redirect to login page
+            window.location.href = 'login.html';
+        });
+
+        // Show/hide dropdown when clicking the profile trigger
+        document.querySelector('.profile-trigger').addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = document.querySelector('.user-dropdown');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'flex' : 'none';
+        });
     </script>
 </body>
 </html>
