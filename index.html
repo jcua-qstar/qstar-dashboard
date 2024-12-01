@@ -98,6 +98,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            position: relative;
         }
 
         .user-profile .profile-trigger {
@@ -126,22 +127,27 @@
             top: 100%;
             right: 0;
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-radius: 5px;
-            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 0.5rem;
             display: none;
             flex-direction: column;
             gap: 0.5rem;
+            z-index: 1000;
+            min-width: 180px;
         }
 
         .user-dropdown a {
             color: #666;
             text-decoration: none;
-            transition: color 0.3s;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            display: block;
+            transition: background 0.3s;
         }
 
         .user-dropdown a:hover {
-            color: #742fdf;
+            background: rgba(116, 47, 223, 0.1);
         }
 
         .dropdown-content {
@@ -1204,18 +1210,30 @@
             }
         }
 
-        // Add this to your existing scripts
+        // Sign out functionality
         document.getElementById('signOutButton').addEventListener('click', function(e) {
             e.preventDefault();
-            // Redirect to login page
             window.location.href = 'login.html';
         });
 
-        // Show/hide dropdown when clicking the profile trigger
+        // Toggle dropdown when clicking the profile trigger
         document.querySelector('.profile-trigger').addEventListener('click', function(e) {
             e.preventDefault();
             const dropdown = document.querySelector('.user-dropdown');
-            dropdown.style.display = dropdown.style.display === 'none' ? 'flex' : 'none';
+            if (dropdown.style.display === 'flex') {
+                dropdown.style.display = 'none';
+            } else {
+                dropdown.style.display = 'flex';
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const profile = document.querySelector('.user-profile');
+            const dropdown = document.querySelector('.user-dropdown');
+            if (!profile.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
         });
     </script>
 </body>
