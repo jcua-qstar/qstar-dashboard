@@ -293,6 +293,102 @@
         }
 
         /* Add these new CSS for the candidate page */
+        .candidates-page {
+            padding: 2rem;
+        }
+
+        .candidates-page .stats-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .candidates-page .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .candidates-page .stat-card i {
+            font-size: 1.5rem;
+            color: #742fdf;
+            padding: 0.5rem;
+            background: rgba(116, 47, 223, 0.1);
+            border-radius: 8px;
+        }
+
+        .candidates-page .stat-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .candidates-page .stat-value-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .candidates-page .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0;
+        }
+
+        .candidates-page .trend {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            white-space: nowrap;
+        }
+
+        .candidates-page .trend.positive {
+            color: #2ecc71;
+        }
+
+        .candidates-page .trend.negative {
+            color: #e74c3c;
+        }
+
+        .candidates-page .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .candidates-page .chart-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .candidates-page .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .candidates-page .chart-header h3 {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .candidates-page .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
         .candidates-page .chart-header {
             display: flex;
             justify-content: space-between;
@@ -503,15 +599,15 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="#" data-page="dashboard" class="active">
+            <a href="#/" data-page="dashboard" class="active">
                 <i class="fas fa-chart-line"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="#" data-page="candidates">
+            <a href="#/candidates" data-page="candidates">
                 <i class="fas fa-users"></i>
                 <span>Candidates</span>
             </a>
-            <a href="#" data-page="benchmarks">
+            <a href="#/benchmarks" data-page="benchmarks">
                 <i class="fas fa-chart-bar"></i>
                 <span>Benchmarks</span>
             </a>
@@ -527,8 +623,8 @@
                         <i class="fas fa-caret-down"></i>
                     </div>
                     <div class="user-dropdown">
-                        <a href="#"><i class="fas fa-user"></i> Profile</a>
-                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#/profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#/settings"><i class="fas fa-cog"></i> Settings</a>
                         <a href="#" id="signOutButton"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                     </div>
                 </div>
@@ -560,15 +656,16 @@
                         case 'candidates':
                             mainContent.innerHTML = `
                                 <main class="candidates-page">
-                                    <!-- Stats Header -->
                                     <div class="stats-header">
                                         <div class="stat-card">
                                             <i class="fas fa-file-signature"></i>
                                             <div class="stat-info">
                                                 <h4>In Offer Stage</h4>
-                                                <div class="stat-value">12</div>
-                                                <div class="trend positive">
-                                                    <i class="fas fa-arrow-up"></i> 4 more than last month
+                                                <div class="stat-value-container">
+                                                    <div class="stat-value">12</div>
+                                                    <div class="trend positive">
+                                                        <i class="fas fa-arrow-up"></i> 4 more than last month
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -576,9 +673,11 @@
                                             <i class="fas fa-user-nurse"></i>
                                             <div class="stat-info">
                                                 <h4>Hires, YTD</h4>
-                                                <div class="stat-value">245</div>
-                                                <div class="trend positive">
-                                                    <i class="fas fa-arrow-up"></i> 15% increase
+                                                <div class="stat-value-container">
+                                                    <div class="stat-value">245</div>
+                                                    <div class="trend positive">
+                                                        <i class="fas fa-arrow-up"></i> 15% increase
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -586,9 +685,11 @@
                                             <i class="fas fa-clipboard-list"></i>
                                             <div class="stat-info">
                                                 <h4>Open Positions</h4>
-                                                <div class="stat-value">68</div>
-                                                <div class="trend negative">
-                                                    <i class="fas fa-arrow-up"></i> 8 more openings
+                                                <div class="stat-value-container">
+                                                    <div class="stat-value">68</div>
+                                                    <div class="trend negative">
+                                                        <i class="fas fa-arrow-up"></i> 8 more openings
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1235,6 +1336,113 @@
                 dropdown.style.display = 'none';
             }
         });
+
+        // Add this router code after your DOMContentLoaded event listener
+        class Router {
+            constructor(routes) {
+                this.routes = routes;
+                this.currentPath = '';
+                
+                // Handle initial load and back/forward navigation
+                window.addEventListener('popstate', () => this.handleRoute());
+                
+                // Handle initial page load
+                this.handleRoute();
+            }
+
+            navigate(path) {
+                // Update URL without full page reload
+                window.history.pushState({}, '', path);
+                this.handleRoute();
+            }
+
+            handleRoute() {
+                // Get current path from URL, defaulting to '/' if none
+                const path = window.location.hash.slice(1) || '/';
+                this.currentPath = path;
+                
+                // Find matching route handler
+                const route = this.routes[path] || this.routes['/'];
+                route();
+            }
+        }
+
+        // Initialize router after DOM content is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Define routes
+            const router = new Router({
+                '/': loadDashboard,
+                '/candidates': () => {
+                    document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+                    document.querySelector('[data-page="candidates"]').classList.add('active');
+                    loadCandidatesPage();
+                },
+                '/benchmarks': () => {
+                    document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+                    document.querySelector('[data-page="benchmarks"]').classList.add('active');
+                    loadBenchmarksPage();
+                },
+                '/settings': () => {
+                    loadSettingsPage();
+                }
+            });
+
+            // Update navigation links to use router
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    const path = page === 'dashboard' ? '/' : `/${page}`;
+                    router.navigate(path);
+                });
+            });
+
+            // Update settings link in dropdown
+            document.querySelector('.user-dropdown a[href="#"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                router.navigate('/settings');
+            });
+        });
+
+        // Separate your page load functions
+        function loadDashboard() {
+            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+            document.querySelector('[data-page="dashboard"]').classList.add('active');
+            // Your existing dashboard loading code
+            mainContent.innerHTML = `
+                <main class="dashboard-page">
+                    // ... your existing dashboard HTML ...
+                </main>
+            `;
+            initializeCharts();
+        }
+
+        function loadCandidatesPage() {
+            mainContent.innerHTML = `
+                <main class="candidates-page">
+                    // ... your existing candidates page HTML ...
+                </main>
+            `;
+            initializeCandidateCharts();
+        }
+
+        function loadBenchmarksPage() {
+            mainContent.innerHTML = `
+                <main class="benchmarks-page">
+                    // ... your existing benchmarks page HTML ...
+                </main>
+            `;
+            initializeBenchmarkCharts();
+        }
+
+        function loadSettingsPage() {
+            mainContent.innerHTML = `
+                <main class="settings-page">
+                    <h1>Settings</h1>
+                    // Add your settings page content here
+                </main>
+            `;
+        }
     </script>
 </body>
 </html>
