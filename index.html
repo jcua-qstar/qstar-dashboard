@@ -905,17 +905,21 @@
 
             // Extract dashboard loading into a separate function
             function loadDashboard() {
+                document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+                document.querySelector('[data-page="dashboard"]').classList.add('active');
+                
                 mainContent.innerHTML = `
                     <main class="dashboard-page">
-                        <!-- Stats Header -->
                         <div class="stats-header">
                             <div class="stat-card">
                                 <i class="fas fa-chart-line"></i>
                                 <div class="stat-info">
                                     <h4>Turnover Rate</h4>
-                                    <div class="stat-value">12.5%</div>
-                                    <div class="trend positive">
-                                        <i class="fas fa-arrow-down"></i> 3.2% from last month
+                                    <div class="stat-value-container">
+                                        <div class="stat-value">12.5%</div>
+                                        <div class="trend positive">
+                                            <i class="fas fa-arrow-down"></i> 3.2% from last month
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -923,9 +927,11 @@
                                 <i class="fas fa-clock"></i>
                                 <div class="stat-info">
                                     <h4>Time-to-Hire</h4>
-                                    <div class="stat-value">28d</div>
-                                    <div class="trend positive">
-                                        <i class="fas fa-arrow-down"></i> 5 days faster
+                                    <div class="stat-value-container">
+                                        <div class="stat-value">28d</div>
+                                        <div class="trend positive">
+                                            <i class="fas fa-arrow-down"></i> 5 days faster
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -933,9 +939,11 @@
                                 <i class="fas fa-user-minus"></i>
                                 <div class="stat-info">
                                     <h4>Staff Shortage</h4>
-                                    <div class="stat-value">15</div>
-                                    <div class="trend negative">
-                                        <i class="fas fa-arrow-up"></i> 3 more this month
+                                    <div class="stat-value-container">
+                                        <div class="stat-value">15</div>
+                                        <div class="trend negative">
+                                            <i class="fas fa-arrow-up"></i> 3 more this month
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1411,7 +1419,146 @@
             // Your existing dashboard loading code
             mainContent.innerHTML = `
                 <main class="dashboard-page">
-                    // ... your existing dashboard HTML ...
+                    <div class="stats-header">
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line"></i>
+                            <div class="stat-info">
+                                <h4>Turnover Rate</h4>
+                                <div class="stat-value-container">
+                                    <div class="stat-value">12.5%</div>
+                                    <div class="trend positive">
+                                        <i class="fas fa-arrow-down"></i> 3.2% from last month
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <h4>Time-to-Hire</h4>
+                                <div class="stat-value-container">
+                                    <div class="stat-value">28d</div>
+                                    <div class="trend positive">
+                                        <i class="fas fa-arrow-down"></i> 5 days faster
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-user-minus"></i>
+                            <div class="stat-info">
+                                <h4>Staff Shortage</h4>
+                                <div class="stat-value-container">
+                                    <div class="stat-value">15</div>
+                                    <div class="trend negative">
+                                        <i class="fas fa-arrow-up"></i> 3 more this month
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <div class="stat-info">
+                                <h4>ROI Impact</h4>
+                                <div class="stat-value">$1.2M</div>
+                                <div class="trend positive">
+                                    <i class="fas fa-arrow-up"></i> 15% increase
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Charts Column -->
+                        <div class="charts-column">
+                            <div class="chart-card">
+                                <h3>Hiring Trends</h3>
+                                <div class="chart-container">
+                                    <canvas id="hiringTrendsChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <h3>Department Distribution</h3>
+                                <div class="chart-container">
+                                    <canvas id="departmentDistributionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Charts Column -->
+
+                        <!-- Tables Column -->
+                        <div class="tables-column">
+                            <div class="table-card">
+                                <h3>Top Candidates</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Score</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>John Doe</td>
+                                            <td>Software Engineer</td>
+                                            <td>92</td>
+                                            <td>Active</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jane Smith</td>
+                                            <td>Data Scientist</td>
+                                            <td>88</td>
+                                            <td>Active</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bob Johnson</td>
+                                            <td>UX Designer</td>
+                                            <td>85</td>
+                                            <td>Inactive</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-card">
+                                <h3>Recent Applications</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Candidate</th>
+                                            <th>Position</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Alice Brown</td>
+                                            <td>Product Manager</td>
+                                            <td>2023-09-15</td>
+                                            <td>Pending</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Charlie Davis</td>
+                                            <td>Data Analyst</td>
+                                            <td>2023-09-14</td>
+                                            <td>Interview</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eva Green</td>
+                                            <td>UX Designer</td>
+                                            <td>2023-09-13</td>
+                                            <td>Rejected</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End Tables Column -->
+                    </div>
+                    <!-- End Main Content Grid -->
                 </main>
             `;
             initializeCharts();
