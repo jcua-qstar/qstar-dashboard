@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - QStar Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            min-width: 400px;
+        }
+
+        .hospital-info {
+            border-left: 2px solid #eee;
+            padding-left: 2rem;
+            cursor: pointer;
+        }
+
+        .hospital-info h2 {
+            color: #742fdf;
+            font-size: 1.2rem;
+        }
+
+        .hospital-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            margin: 0 2rem;
+        }
+
+        .nav-menu a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a.active {
+            color: #742fdf;
+            background: rgba(116, 47, 223, 0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-buttons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .action-buttons button:hover {
+            color: #742fdf;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-profile .profile-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-profile .profile-trigger img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .user-profile .profile-trigger span {
+            font-weight: 500;
+        }
+
+        .user-profile .profile-trigger i {
+            font-size: 0.8rem;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 5px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .user-dropdown a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .user-dropdown a:hover {
+            color: #742fdf;
+        }
+
+        .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(116, 47, 223, 0.1);
+        }
+
+        .dropdown-item.selected {
+            background: #742fdf;
+            color: white;
+        }
+
+        .dropdown-item.selected:hover {
+            background: #6326c4;
+        }
+
+        .dropdown-item.selected::after {
+            content: '✓';
+            float: right;
+            color: white;
+        }
+
+        .caret {
+            transition: transform 0.3s;
+        }
+
+        .dropdown-content.show .caret {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content.hide .caret {
+            transform: rotate(0deg);
+        }
+
+        .dropdown-content.show {
+            display: flex;
+        }
+
+        .dropdown-content.hide {
+            display: none;
+        }
+
+        /* Add these dashboard-specific styles */
+        .dashboard-page {
+            padding: 2rem;
+        }
+
+        .stats-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-card i {
+            font-size: 1.5rem;
+            color: #742fdf;
+        }
+
+        .stat-info h4 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .trend {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .trend.positive {
+            color: #2ecc71;
+        }
+
+        .trend.negative {
+            color: #e74c3c;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .chart-card, .table-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-card h3, .table-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            height: 300px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Add these new CSS for the candidate page */
+        .candidates-page .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .candidates-page .chart-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .candidates-page .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .candidates-page .icon-button:hover {
+            color: #742fdf;
+        }
+
+        .candidates-page .passthrough-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .candidates-page .passthrough-table th, .candidates-page .passthrough-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .candidates-page .passthrough-table th {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .chart-header, .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .icon-button:hover {
+            color: #742fdf;
+        }
+
+        .passthrough-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .passthrough-table th,
+        .passthrough-table td {
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .passthrough-table th:first-child,
+        .passthrough-table td:first-child {
+            text-align: left;
+        }
+
+        .passthrough-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .passthrough-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Add these styles for the benchmarks page */
+        .benchmarks-page {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .title-section {
+            margin-bottom: 2rem;
+        }
+
+        .title-section h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .title-section .subtitle {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .benchmarks-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .metrics-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metrics-card, .comparison-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metrics-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table th {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .comparison-table .positive {
+            color: #2ecc71;
+        }
+
+        .comparison-table .negative {
+            color: #e74c3c;
+        }
+
+        .cta-footer {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            background: #742fdf;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #6326c4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header/Navigation -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <img src="https://qstarhealth.com/wp-content/uploads/2023/09/qstar-logo.svg" alt="QStar Health Logo">
+            </div>
+            <div class="hospital-info">
+                <h2>Memorial General Hospital</h2>
+                <p>Los Angeles Healthcare System</p>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" data-page="dashboard" class="active">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" data-page="candidates">
+                <i class="fas fa-users"></i>
+                <span>Candidates</span>
+            </a>
+            <a href="#" data-page="benchmarks">
+                <i class="fas fa-chart-bar"></i>
+                <span>Benchmarks</span>
+            </a>
+        </nav>
+
+        <div class="header-right">
+            <div class="action-buttons">
+                <button><i class="fas fa-bell"></i></button>
+                <button><i class="fas fa-cog"></i></button>
+                <div class="user-profile">
+                    <div class="profile-trigger">
+                        <img src="user-avatar.jpg" alt="User Avatar">
+                        <span>John Doe</span>
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                    <div class="user-dropdown">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dynamic Content Container -->
+    <div id="mainContent"></div>
+
+    <!-- Your scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const mainContent = document.getElementById('mainContent');
+
+            // Load dashboard content and initialize charts on page load
+            loadDashboard();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                    const page = this.dataset.page;
+                    
+                    switch(page) {
+                        case 'candidates':
+                            mainContent.innerHTML = `
+                                <main class="candidates-page">
+                                    <!-- Stats Header -->
+                                    <div class="stats-header">
+                                        <div class="stat-card">
+                                            <i class="fas fa-file-signature"></i>
+                                            <div class="stat-info">
+                                                <h4>In Offer Stage</h4>
+                                                <div class="stat-value">12</div>
+                                                <div class="trend positive">
+                                                    <i class="fas fa-arrow-up"></i> 4 more than last month
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <i class="fas fa-user-nurse"></i>
+                                            <div class="stat-info">
+                                                <h4>Hires, YTD</h4>
+                                                <div class="stat-value">245</div>
+                                                <div class="trend positive">
+                                                    <i class="fas fa-arrow-up"></i> 15% increase
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <i class="fas fa-clipboard-list"></i>
+                                            <div class="stat-info">
+                                                <h4>Open Positions</h4>
+                                                <div class="stat-value">68</div>
+                                                <div class="trend negative">
+                                                    <i class="fas fa-arrow-up"></i> 8 more openings
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Content Grid -->
+                                    <div class="dashboard-grid">
+                                        <!-- Charts Column -->
+                                        <div class="charts-column">
+                                            <div class="chart-card">
+                                                <div class="chart-header">
+                                                    <h3>Hires by Department, YTD</h3>
+                                                    <div class="chart-actions">
+                                                        <button class="icon-button"><i class="fas fa-ellipsis-v"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-container">
+                                                    <canvas id="departmentHiresChart"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="chart-card">
+                                                <div class="chart-header">
+                                                    <h3>Time in Process by Department</h3>
+                                                    <div class="chart-actions">
+                                                        <button class="icon-button"><i class="fas fa-ellipsis-v"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-container">
+                                                    <canvas id="timeInProcessChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tables Column -->
+                                        <div class="tables-column">
+                                            <div class="table-card">
+                                                <div class="table-header">
+                                                    <h3>Passthrough Rates</h3>
+                                                    <div class="table-actions">
+                                                        <button class="icon-button"><i class="fas fa-ellipsis-v"></i></button>
+                                                    </div>
+                                                </div>
+                                                <table class="passthrough-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Source</th>
+                                                            <th>Screening</th>
+                                                            <th>Interview</th>
+                                                            <th>Offer</th>
+                                                            <th>Hired</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Internal Referrals</td>
+                                                            <td>85%</td>
+                                                            <td>72%</td>
+                                                            <td>65%</td>
+                                                            <td>58%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Nursing Schools</td>
+                                                            <td>78%</td>
+                                                            <td>65%</td>
+                                                            <td>55%</td>
+                                                            <td>48%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Job Boards</td>
+                                                            <td>62%</td>
+                                                            <td>45%</td>
+                                                            <td>38%</td>
+                                                            <td>32%</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            `;
+                            initializeCandidateCharts();
+                            break;
+                        case 'dashboard':
+                            loadDashboard();
+                            break;
+                        case 'benchmarks':
+                            mainContent.innerHTML = `
+                                <main class="benchmarks-page">
+                                    <!-- Title Section -->
+                                    <div class="title-section">
+                                        <h1>How Are You Performing Compared To Your Competition?</h1>
+                                        <p class="subtitle">Hospital benchmarking data is available to help hospitals compare their performance to similar institutions. Insights are provided into where nurses are going and leaving from to identify trends and opportunities for improvement.</p>
+                                    </div>
+
+                                    <!-- Main Content Grid -->
+                                    <div class="benchmarks-grid">
+                                        <!-- Tenure Chart -->
+                                        <div class="chart-card full-width">
+                                            <div class="chart-header">
+                                                <h3>Current Employee Tenure by Previous Company</h3>
+                                                <div class="chart-actions">
+                                                    <button class="icon-button" title="Filter by Department">
+                                                        <i class="fas fa-filter"></i>
+                                                    </button>
+                                                    <button class="icon-button" title="Download Data">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="icon-button">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="chart-container">
+                                                <canvas id="tenureChart"></canvas>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sankey Diagram -->
+                                        <div class="chart-card full-width">
+                                            <div class="chart-header">
+                                                <h3>Nurse Flow Between Hospitals</h3>
+                                                <div class="chart-actions">
+                                                    <button class="icon-button" title="Filter by Time Period">
+                                                        <i class="fas fa-calendar"></i>
+                                                    </button>
+                                                    <button class="icon-button" title="Download Data">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="icon-button">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="chart-container">
+                                                <canvas id="sankeyChart"></canvas>
+                                            </div>
+                                        </div>
+
+                                        <!-- Metrics Section -->
+                                        <div class="metrics-section">
+                                            <div class="metrics-card">
+                                                <div class="card-header">
+                                                    <h3>Poachability Score</h3>
+                                                    <button class="icon-button">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="metrics-description">By leveraging hospital competitor data, we calculate 'poachability' scores. Identifying top-tier candidates who, while currently employed, may be open to new opportunities under the right circumstances.</p>
+                                                <div class="score-container">
+                                                    <canvas id="poachabilityChart"></canvas>
+                                                </div>
+                                            </div>
+
+                                            <!-- Comparison Table -->
+                                            <div class="comparison-card">
+                                                <div class="card-header">
+                                                    <h3>Performance Comparison</h3>
+                                                    <button class="icon-button">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <table class="comparison-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Metric</th>
+                                                            <th>Your Hospital</th>
+                                                            <th>Competitor Avg</th>
+                                                            <th>Difference</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Nurse Retention Rate</td>
+                                                            <td>85%</td>
+                                                            <td>78%</td>
+                                                            <td class="positive">+7%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Average Time to Hire</td>
+                                                            <td>28 days</td>
+                                                            <td>35 days</td>
+                                                            <td class="positive">-7 days</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Average Tenure</td>
+                                                            <td>4.2 years</td>
+                                                            <td>3.8 years</td>
+                                                            <td class="positive">+0.4 years</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Call to Action -->
+                                    <div class="cta-footer">
+                                        <div class="cta-content">
+                                            <h3>Want to see how you compare in more detail?</h3>
+                                            <p>Get a comprehensive benchmarking report customized for your hospital.</p>
+                                        </div>
+                                        <button class="cta-button">Request Detailed Report</button>
+                                    </div>
+                                </main>
+                            `;
+                            initializeBenchmarkCharts();
+                            break;
+                        // Add more cases for other pages
+                    }
+                });
+            });
+
+            // Extract dashboard loading into a separate function
+            function loadDashboard() {
+                mainContent.innerHTML = `
+                    <main class="dashboard-page">
+                        <!-- Stats Header -->
+                        <div class="stats-header">
+                            <div class="stat-card">
+                                <i class="fas fa-chart-line"></i>
+                                <div class="stat-info">
+                                    <h4>Turnover Rate</h4>
+                                    <div class="stat-value">12.5%</div>
+                                    <div class="trend positive">
+                                        <i class="fas fa-arrow-down"></i> 3.2% from last month
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-clock"></i>
+                                <div class="stat-info">
+                                    <h4>Time-to-Hire</h4>
+                                    <div class="stat-value">28d</div>
+                                    <div class="trend positive">
+                                        <i class="fas fa-arrow-down"></i> 5 days faster
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-user-minus"></i>
+                                <div class="stat-info">
+                                    <h4>Staff Shortage</h4>
+                                    <div class="stat-value">15</div>
+                                    <div class="trend negative">
+                                        <i class="fas fa-arrow-up"></i> 3 more this month
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-dollar-sign"></i>
+                                <div class="stat-info">
+                                    <h4>ROI Impact</h4>
+                                    <div class="stat-value">$1.2M</div>
+                                    <div class="trend positive">
+                                        <i class="fas fa-arrow-up"></i> 15% increase
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Grid -->
+                        <div class="dashboard-grid">
+                            <!-- Charts Column -->
+                            <div class="charts-column">
+                                <div class="chart-card">
+                                    <h3>Hiring Trends</h3>
+                                    <div class="chart-container">
+                                        <canvas id="hiringTrendsChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="chart-card">
+                                    <h3>Department Distribution</h3>
+                                    <div class="chart-container">
+                                        <canvas id="departmentDistributionChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Charts Column -->
+
+                            <!-- Tables Column -->
+                            <div class="tables-column">
+                                <div class="table-card">
+                                    <h3>Top Candidates</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Score</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>John Doe</td>
+                                                <td>Software Engineer</td>
+                                                <td>92</td>
+                                                <td>Active</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jane Smith</td>
+                                                <td>Data Scientist</td>
+                                                <td>88</td>
+                                                <td>Active</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bob Johnson</td>
+                                                <td>UX Designer</td>
+                                                <td>85</td>
+                                                <td>Inactive</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-card">
+                                    <h3>Recent Applications</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Candidate</th>
+                                                <th>Position</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Alice Brown</td>
+                                                <td>Product Manager</td>
+                                                <td>2023-09-15</td>
+                                                <td>Pending</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Charlie Davis</td>
+                                                <td>Data Analyst</td>
+                                                <td>2023-09-14</td>
+                                                <td>Interview</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Eva Green</td>
+                                                <td>UX Designer</td>
+                                                <td>2023-09-13</td>
+                                                <td>Rejected</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- End Tables Column -->
+                        </div>
+                        <!-- End Main Content Grid -->
+                    </main>
+                `;
+                // Remove setTimeout and call directly since we're already in an event handler
+                initializeCharts();
+            }
+        });
+
+        // Initialize charts after dashboard content is loaded
+        function initializeCharts() {
+            // Hiring Trends Chart
+            const hiringTrendsCtx = document.getElementById('hiringTrendsChart')?.getContext('2d');
+            if (hiringTrendsCtx) {
+                new Chart(hiringTrendsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Hires',
+                            data: [12, 19, 15, 17, 22, 24],
+                            borderColor: '#742fdf',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Department Distribution Chart
+            const deptDistCtx = document.getElementById('departmentDistributionChart')?.getContext('2d');
+            if (deptDistCtx) {
+                new Chart(deptDistCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Nursing', 'Admin', 'Medical', 'Technical'],
+                        datasets: [{
+                            data: [45, 25, 20, 10],
+                            backgroundColor: ['#742fdf', '#2ecc71', '#3498db', '#e74c3c']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        // Initialize candidate charts after candidate content is loaded
+        function initializeCandidateCharts() {
+            // Department Hires Chart
+            const hiresCtx = document.getElementById('departmentHiresChart')?.getContext('2d');
+            if (hiresCtx) {
+                new Chart(hiresCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['ICU', 'Emergency', 'Pediatrics', 'Surgery', 'Medical/Surgical', 'Labor & Delivery'],
+                        datasets: [{
+                            label: 'Hires YTD',
+                            data: [45, 38, 32, 28, 25, 22],
+                            backgroundColor: '#742fdf',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Hires'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Time in Process Chart
+            const timeCtx = document.getElementById('timeInProcessChart')?.getContext('2d');
+            if (timeCtx) {
+                new Chart(timeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['ICU', 'Emergency', 'Pediatrics', 'Surgery', 'Medical/Surgical'],
+                        datasets: [{
+                            label: 'Screening',
+                            data: [5, 4, 6, 5, 4],
+                            backgroundColor: '#742fdf'
+                        }, {
+                            label: 'Interview',
+                            data: [8, 7, 9, 8, 7],
+                            backgroundColor: '#2ecc71'
+                        }, {
+                            label: 'Offer',
+                            data: [4, 3, 5, 4, 3],
+                            backgroundColor: '#3498db'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true
+                            },
+                            y: {
+                                stacked: true,
+                                title: {
+                                    display: true,
+                                    text: 'Days in Stage'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize benchmark charts after benchmark content is loaded
+        function initializeBenchmarkCharts() {
+            // Define consistent color palette
+            const colorPalette = {
+                primary: '#742fdf',    // Purple
+                success: '#2ecc71',    // Green
+                info: '#3498db',       // Blue
+                warning: '#f1c40f',    // Yellow
+                danger: '#e74c3c',     // Red
+                secondary: '#6326c4',  // Dark Purple
+                tertiary: '#9b59b6',   // Light Purple
+                neutral: '#95a5a6'     // Gray
+            };
+
+            // Tenure Chart
+            const tenureCtx = document.getElementById('tenureChart')?.getContext('2d');
+            if (tenureCtx) {
+                new Chart(tenureCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'Mayo Clinic',
+                            'Cleveland Clinic',
+                            'Johns Hopkins Hospital',
+                            'Massachusetts General',
+                            'UCLA Medical Center',
+                            'Stanford Health Care',
+                            'Mount Sinai Hospital',
+                            'NYU Langone Hospitals',
+                            'UCSF Medical Center'
+                        ],
+                        datasets: [{
+                            label: 'Average Tenure (months)',
+                            data: [200, 175, 165, 155, 145, 140, 135, 130, 125],
+                            backgroundColor: [
+                                colorPalette.primary,
+                                colorPalette.success,
+                                colorPalette.info,
+                                colorPalette.warning,
+                                colorPalette.danger,
+                                colorPalette.secondary,
+                                colorPalette.tertiary,
+                                colorPalette.neutral,
+                                colorPalette.primary
+                            ],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Average Tenure (months)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Poachability Score Chart
+            const poachabilityCtx = document.getElementById('poachabilityChart')?.getContext('2d');
+            if (poachabilityCtx) {
+                new Chart(poachabilityCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['High Risk', 'Medium Risk', 'Low Risk'],
+                        datasets: [{
+                            data: [30, 45, 25],
+                            backgroundColor: [
+                                colorPalette.danger,
+                                colorPalette.warning,
+                                colorPalette.success
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Sankey placeholder with updated hospital names
+            const sankeyCtx = document.getElementById('sankeyChart')?.getContext('2d');
+            if (sankeyCtx) {
+                new Chart(sankeyCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'Mayo Clinic',
+                            'Cleveland Clinic',
+                            'Johns Hopkins',
+                            'Mass General',
+                            'Stanford Health'
+                        ],
+                        datasets: [{
+                            label: 'Nurse Flow',
+                            data: [45, 38, 32, 28, 25],
+                            backgroundColor: [
+                                colorPalette.primary,
+                                colorPalette.success,
+                                colorPalette.info,
+                                colorPalette.warning,
+                                colorPalette.danger
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

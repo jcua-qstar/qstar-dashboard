@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidates - QStar Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .candidates-container {
+            padding: 2rem;
+        }
+
+        .search-filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-box {
+            flex: 2;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .filter-select {
+            flex: 1;
+        }
+
+        .filter-select select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .candidate-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+        }
+
+        .candidate-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .candidate-card p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="candidates-container">
+        <div class="search-filters">
+            <div class="filter-row">
+                <div class="search-box">
+                    <input type="text" placeholder="Search candidates...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="filter-select">
+                    <select>
+                        <option>All</option>
+                        <option>Location</option>
+                        <option>Department</option>
+                        <option>Position</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="candidates-grid">
+            <div class="candidate-card">
+                <h3>John Doe</h3>
+                <p>Location: New York</p>
+                <p>Department: Medical</p>
+                <p>Position: Doctor</p>
+            </div>
+            <div class="candidate-card">
+                <h3>Jane Smith</h3>
+                <p>Location: Los Angeles</p>
+                <p>Department: Nursing</p>
+                <p>Position: Nurse</p>
+            </div>
+            <div class="candidate-card">
+                <h3>Bob Johnson</h3>
+                <p>Location: Chicago</p>
+                <p>Department: Pharmacy</p>
+                <p>Position: Pharmacist</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
