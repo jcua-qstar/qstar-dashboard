@@ -1,0 +1,12 @@
+.dashboard-page {
+    padding: 2rem;
+}
+
+.dashboard-page .stats-header {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Copy your existing dashboard styles here */ 
