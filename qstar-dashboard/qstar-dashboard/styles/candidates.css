@@ -1,0 +1,144 @@
+<div class="candidates-container">
+    <div class="search-section">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="candidate-search" placeholder="Search candidates...">
+        </div>
+        
+        <div class="filters-panel">
+            <div class="filter-group">
+                <select id="specialty-filter">
+                    <option value="">Specialty</option>
+                    <option value="ICU">ICU</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Surgery">Surgery</option>
+                </select>
+
+                <div class="range-filter">
+                    <label>Driving Distance (miles)</label>
+                    <input type="range" id="distance-filter" min="0" max="100" value="25">
+                    <span id="distance-value">25</span>
+                </div>
+
+                <select id="school-filter" multiple>
+                    <option value="">School</option>
+                </select>
+
+                <div class="range-filter">
+                    <label>Years of Experience</label>
+                    <input type="range" id="tenure-filter" min="0" max="10" value="0">
+                    <span id="tenure-value">0</span>
+                </div>
+
+                <div class="checkbox-group">
+                    <label>License Type</label>
+                    <div>
+                        <input type="checkbox" id="rn-license" value="RN">
+                        <label for="rn-license">RN</label>
+                        <input type="checkbox" id="lpn-license" value="LPN">
+                        <label for="lpn-license">LPN</label>
+                        <input type="checkbox" id="np-license" value="NP">
+                        <label for="np-license">NP</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <label>Certifications</label>
+                    <div>
+                        <input type="checkbox" id="acls-cert" value="ACLS">
+                        <label for="acls-cert">ACLS</label>
+                        <input type="checkbox" id="bls-cert" value="BLS">
+                        <label for="bls-cert">BLS</label>
+                        <input type="checkbox" id="pals-cert" value="PALS">
+                        <label for="pals-cert">PALS</label>
+                    </div>
+                </div>
+            </div>
+            <button id="clear-filters" class="btn-secondary">Clear Filters</button>
+        </div>
+    </div>
+
+    <div class="candidates-results">
+        <table id="candidates-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Specialty</th>
+                    <th>Tenure</th>
+                    <th>School</th>
+                    <th>License</th>
+                    <th>Certifications</th>
+                    <th>Distance</th>
+                </tr>
+            </thead>
+            <tbody id="candidates-body">
+                <!-- Results will be populated here -->
+            </tbody>
+        </table>
+        <div id="no-results" class="hidden">
+            <p>No candidates match your criteria. Try adjusting your search or filters.</p>
+            <button class="btn-primary" id="reset-search">Reset Search</button>
+        </div>
+        <div class="pagination">
+            <button id="prev-page" class="btn-secondary">&lt; Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" class="btn-secondary">Next &gt;</button>
+        </div>
+    </div>
+</div>
+
+.candidates-container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Bar Styles */
+.search-section {
+    margin-bottom: 24px;
+}
+
+.search-bar {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Filter Panel Styles */
+.filters-panel {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-group select,
+.range-filter input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
