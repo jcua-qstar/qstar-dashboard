@@ -493,6 +493,279 @@
         .cta-button:hover {
             background: #6326c4;
         }
+
+        .search-section {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-bar {
+            flex: 1;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            background: #742fdf;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-button:hover {
+            background: #6326c4;
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-filters select {
+            padding: 0.75rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .search-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .search-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #742fdf;
+        }
+
+        /* Enhanced Search Styles */
+        .search-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #742fdf;
+            box-shadow: 0 0 0 3px rgba(116, 47, 223, 0.1);
+        }
+
+        /* Filter Panel Styles */
+        .filter-panel {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-item i {
+            color: #742fdf;
+            width: 20px;
+            text-align: center;
+        }
+
+        .filter-item select {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-item select:focus {
+            outline: none;
+            border-color: #742fdf;
+            box-shadow: 0 0 0 3px rgba(116, 47, 223, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .clear-filters-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .clear-filters-btn:hover {
+            background: rgba(116, 47, 223, 0.1);
+            color: #742fdf;
+        }
+
+        /* Results Table Styles */
+        .candidates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .candidates-table th,
+        .candidates-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .candidates-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .candidates-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .certification-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: rgba(116, 47, 223, 0.1);
+            color: #742fdf;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin: 0.25rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            background: white;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .no-results i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #742fdf;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .candidate-name {
+            color: #742fdf;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .candidate-name:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -566,117 +839,104 @@
                         case 'candidates':
                             mainContent.innerHTML = `
                                 <main class="candidates-page">
-                                    <!-- Stats Header -->
-                                    <div class="stats-header">
-                                        <div class="stat-card">
-                                            <i class="fas fa-file-signature"></i>
-                                            <div class="stat-info">
-                                                <h4>In Offer Stage</h4>
-                                                <div class="stat-value">12</div>
-                                                <div class="trend positive">
-                                                    <i class="fas fa-arrow-up"></i> 4 more than last month
-                                                </div>
+                                    <div class="search-container">
+                                        <h2 class="page-title">Candidate Search</h2>
+                                        <div class="search-section">
+                                            <div class="search-bar">
+                                                <i class="fas fa-search search-icon"></i>
+                                                <input type="text" id="candidateSearch" 
+                                                    placeholder="Search by name, job title, skills, or certifications...">
                                             </div>
-                                        </div>
-                                        <div class="stat-card">
-                                            <i class="fas fa-user-nurse"></i>
-                                            <div class="stat-info">
-                                                <h4>Hires, YTD</h4>
-                                                <div class="stat-value">245</div>
-                                                <div class="trend positive">
-                                                    <i class="fas fa-arrow-up"></i> 15% increase
+                                            
+                                            <div class="filter-panel">
+                                                <div class="filter-group">
+                                                    <div class="filter-item">
+                                                        <i class="fas fa-hospital-user"></i>
+                                                        <select id="specialtyFilter">
+                                                            <option value="">Specialty</option>
+                                                            <option value="icu">ICU</option>
+                                                            <option value="er">Emergency</option>
+                                                            <option value="peds">Pediatrics</option>
+                                                            <option value="med">Medical/Surgical</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="filter-item">
+                                                        <i class="fas fa-location-dot"></i>
+                                                        <select id="distanceFilter">
+                                                            <option value="">Driving Distance</option>
+                                                            <option value="10">Within 10 miles</option>
+                                                            <option value="25">Within 25 miles</option>
+                                                            <option value="50">Within 50 miles</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="filter-item">
+                                                        <i class="fas fa-graduation-cap"></i>
+                                                        <select id="schoolFilter">
+                                                            <option value="">Nursing School</option>
+                                                            <option value="emory">Emory University</option>
+                                                            <option value="gsu">Georgia State University</option>
+                                                            <option value="mercer">Mercer University</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="stat-card">
-                                            <i class="fas fa-clipboard-list"></i>
-                                            <div class="stat-info">
-                                                <h4>Open Positions</h4>
-                                                <div class="stat-value">68</div>
-                                                <div class="trend negative">
-                                                    <i class="fas fa-arrow-up"></i> 8 more openings
+
+                                                <div class="filter-group">
+                                                    <div class="filter-item">
+                                                        <i class="fas fa-clock"></i>
+                                                        <select id="tenureFilter">
+                                                            <option value="">Years of Experience</option>
+                                                            <option value="0-2">0-2 years</option>
+                                                            <option value="3-5">3-5 years</option>
+                                                            <option value="5+">5+ years</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="filter-item license-filter">
+                                                        <i class="fas fa-certificate"></i>
+                                                        <div class="checkbox-group">
+                                                            <label><input type="checkbox" value="RN"> RN</label>
+                                                            <label><input type="checkbox" value="LPN"> LPN</label>
+                                                            <label><input type="checkbox" value="NP"> NP</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="filter-actions">
+                                                    <button id="clearFilters" class="clear-filters-btn">
+                                                        <i class="fas fa-times"></i> Clear Filters
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- Main Content Grid -->
-                                    <div class="dashboard-grid">
-                                        <!-- Charts Column -->
-                                        <div class="charts-column">
-                                            <div class="chart-card">
-                                                <div class="chart-header">
-                                                    <h3>Hires by Department, YTD</h3>
-                                                    <div class="chart-actions">
-                                                        <button class="icon-button"><i class="fas fa-ellipsis-v"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="chart-container">
-                                                    <canvas id="departmentHiresChart"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="chart-card">
-                                                <div class="chart-header">
-                                                    <h3>Time in Process by Department</h3>
-                                                    <div class="chart-actions">
-                                                        <button class="icon-button"><i class="fas fa-ellipsis-v"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="chart-container">
-                                                    <canvas id="timeInProcessChart"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Tables Column -->
-                                        <div class="tables-column">
-                                            <div class="table-card">
-                                                <div class="table-header">
-                                                    <h3>Passthrough Rates</h3>
-                                                    <div class="table-actions">
-                                                        <button class="icon-button"><i class="fas fa-ellipsis-v"></i></button>
-                                                    </div>
-                                                </div>
-                                                <table class="passthrough-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Source</th>
-                                                            <th>Screening</th>
-                                                            <th>Interview</th>
-                                                            <th>Offer</th>
-                                                            <th>Hired</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Internal Referrals</td>
-                                                            <td>85%</td>
-                                                            <td>72%</td>
-                                                            <td>65%</td>
-                                                            <td>58%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nursing Schools</td>
-                                                            <td>78%</td>
-                                                            <td>65%</td>
-                                                            <td>55%</td>
-                                                            <td>48%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Job Boards</td>
-                                                            <td>62%</td>
-                                                            <td>45%</td>
-                                                            <td>38%</td>
-                                                            <td>32%</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                    <div id="searchResults" class="search-results">
+                                        <table class="candidates-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Specialty</th>
+                                                    <th>Tenure</th>
+                                                    <th>School</th>
+                                                    <th>License</th>
+                                                    <th>Certifications</th>
+                                                    <th>Distance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="candidatesTableBody">
+                                                <!-- Results will be populated here -->
+                                            </tbody>
+                                        </table>
+                                        <div id="noResults" class="no-results hidden">
+                                            <i class="fas fa-search"></i>
+                                            <p>No candidates found. Try adjusting your filters or search criteria.</p>
                                         </div>
                                     </div>
                                 </main>
                             `;
-                            initializeCandidateCharts();
+                            initializeCandidateSearch();
                             break;
                         case 'dashboard':
                             loadDashboard();
@@ -1241,6 +1501,153 @@
                 dropdown.style.display = 'none';
             }
         });
+
+        function initializeCandidateSearch() {
+            // Mock data for demonstration
+            const mockCandidates = [
+                {
+                    name: "Sarah Johnson",
+                    specialty: "ICU",
+                    tenure: "5+ years",
+                    school: "Emory University",
+                    license: "RN",
+                    certifications: ["ACLS", "BLS", "PALS"],
+                    distance: "8 miles"
+                },
+                {
+                    name: "Michael Chen",
+                    specialty: "Emergency",
+                    tenure: "3-5 years",
+                    school: "Georgia State University",
+                    license: "RN",
+                    certifications: ["ACLS", "BLS"],
+                    distance: "15 miles"
+                },
+                {
+                    name: "Emily Rodriguez",
+                    specialty: "Pediatrics",
+                    tenure: "0-2 years",
+                    school: "Mercer University",
+                    license: "LPN",
+                    certifications: ["BLS", "PALS"],
+                    distance: "22 miles"
+                },
+                {
+                    name: "David Kim",
+                    specialty: "Medical/Surgical",
+                    tenure: "3-5 years",
+                    school: "Emory University",
+                    license: "RN",
+                    certifications: ["ACLS", "BLS"],
+                    distance: "12 miles"
+                },
+                {
+                    name: "Lisa Martinez",
+                    specialty: "ICU",
+                    tenure: "5+ years",
+                    school: "Georgia State University",
+                    license: "NP",
+                    certifications: ["ACLS", "BLS", "PALS"],
+                    distance: "18 miles"
+                }
+            ];
+
+            const searchInput = document.getElementById('candidateSearch');
+            const specialtyFilter = document.getElementById('specialtyFilter');
+            const distanceFilter = document.getElementById('distanceFilter');
+            const schoolFilter = document.getElementById('schoolFilter');
+            const tenureFilter = document.getElementById('tenureFilter');
+            const clearFiltersBtn = document.getElementById('clearFilters');
+            const tableBody = document.getElementById('candidatesTableBody');
+            const noResults = document.getElementById('noResults');
+
+            function updateResults(filteredCandidates) {
+                tableBody.innerHTML = '';
+                
+                if (filteredCandidates.length === 0) {
+                    noResults.classList.remove('hidden');
+                    return;
+                }
+
+                noResults.classList.add('hidden');
+                filteredCandidates.forEach(candidate => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><a href="#" class="candidate-name">${candidate.name}</a></td>
+                        <td>${candidate.specialty}</td>
+                        <td>${candidate.tenure}</td>
+                        <td>${candidate.school}</td>
+                        <td>${candidate.license}</td>
+                        <td>${candidate.certifications.map(cert => 
+                            `<span class="certification-badge">${cert}</span>`
+                        ).join('')}</td>
+                        <td>${candidate.distance}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function filterCandidates() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const specialty = specialtyFilter.value.toLowerCase();
+                const distance = distanceFilter.value;
+                const school = schoolFilter.value.toLowerCase();
+                const tenure = tenureFilter.value;
+
+                const filtered = mockCandidates.filter(candidate => {
+                    const matchesSearch = candidate.name.toLowerCase().includes(searchTerm) ||
+                                        candidate.certifications.some(cert => cert.toLowerCase().includes(searchTerm));
+                    const matchesSpecialty = !specialty || candidate.specialty.toLowerCase().includes(specialty);
+                    const matchesSchool = !school || candidate.school.toLowerCase().includes(school);
+                    const matchesTenure = !tenure || candidate.tenure === tenure;
+
+                    return matchesSearch && matchesSpecialty && matchesSchool && matchesTenure;
+                });
+
+                updateResults(filtered);
+            }
+
+            // Event listeners
+            searchInput.addEventListener('input', filterCandidates);
+            specialtyFilter.addEventListener('change', filterCandidates);
+            distanceFilter.addEventListener('change', filterCandidates);
+            schoolFilter.addEventListener('change', filterCandidates);
+            tenureFilter.addEventListener('change', filterCandidates);
+
+            clearFiltersBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                specialtyFilter.value = '';
+                distanceFilter.value = '';
+                schoolFilter.value = '';
+                tenureFilter.value = '';
+                document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(cb => cb.checked = false);
+                filterCandidates();
+            });
+
+            // Initialize with all results
+            updateResults(mockCandidates);
+        }
+
+        function performSearch() {
+            const searchTerm = document.getElementById('candidateSearch').value.toLowerCase();
+            const department = document.getElementById('departmentFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            
+            console.log('Searching with:', {
+                searchTerm,
+                department,
+                status
+            });
+            
+            updateSearchResults([
+                { name: 'John Doe', department: 'ICU', status: 'Active' },
+                { name: 'Jane Smith', department: 'Emergency', status: 'Pending' }
+            ]);
+        }
+
+        function updateSearchResults(results) {
+            console.log('Search results:', results);
+        }
     </script>
 </body>
 </html>
